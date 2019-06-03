@@ -1,10 +1,10 @@
 pipeline {
    environment {
-    def CONTAINER_NAME=”jenkins-pipeline”
-    def CONTAINER_TAG=”latest”
-    def DOCKER_HUB_USER=”ikonyeama"
-    def HTTP_PORT=”8090"
-	def REGISTRY_ADDRESS="ikonyeama"
+    def CONTAINER_NAME="jenkins-pipeline”
+    def CONTAINER_TAG="latest”
+    def DOCKER_HUB_USER="ikonyeama"
+    def HTTP_PORT="8090"
+    def REGISTRY_ADDRESS="ikonyeama"
     }
  agent any
     stages {
