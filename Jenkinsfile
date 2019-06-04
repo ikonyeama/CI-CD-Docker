@@ -4,13 +4,14 @@ pipeline {
     agent any
        stages {
         stage("initialize") {
+             def dockerHome = tool 'myDocker'
+             def mavenHome  = tool 'myMaven'
+             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+             }
             steps {
               script {
                 def dateFormat = new SimpleDateFormat("yy.MM.dd")
                 currentBuild.displayName = dateFormat.format(new Date()) + "-" + env.BUILD_NUMBER
-                def dockerHome = tool 'myDocker'
-                def mavenHome  = tool 'myMaven'
-                env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
                }
               withCredentials([usernamePassword(
                 credentialsId: "dockerHubAccount",
