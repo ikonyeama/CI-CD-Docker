@@ -26,7 +26,6 @@ pipeline {
                 sh "cd jenkins && docker image build --no-cache -t nginx ."                             
                 sh "docker image tag nginx:${currentBuild.displayName} dockerUser/jenkins-pipeline:latest"                           
                 sh "docker image push dockerUser/jenkins-pipeline:latest"                                
-                echo “Image push complete"                                                            
             }                                                                                           
         }                                                                                               
     }                                                                                                   
