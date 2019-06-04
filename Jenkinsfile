@@ -14,8 +14,8 @@ pipeline {
                }                                                                                        
               withCredentials([usernamePassword(                                                        
                 credentialsId: "dockerHubAccount",                                                      
-                usernameVariable: "USERNAME",                                                           
-                passwordVariable: "PASSWORD",                                                           
+                usernameVariable: "dockerUser",                                                           
+                passwordVariable: "dockerPassword",                                                           
               )]) {                                                                                     
                 sh "docker login -u $dockerUser -p $dockerPassword"                                             
               }                                                                                         
@@ -24,9 +24,9 @@ pipeline {
         stage('jenkins') {                                                                              
             steps {                                                                                     
                 sh "cd jenkins && docker image build --no-cache -t nginx ."                             
-                sh "docker image tag nginx nginx:${currentBuild.displayName}"                           
-                sh "docker image push nginx:${currentBuild.displayName}"                                
-                sh "docker image push nginx"                                                            
+                sh "docker image tag nginx:${currentBuild.displayName} dockerUser/jenkins-pipeline:latest"                           
+                sh "docker image push dockerUser/jenkins-pipeline:latest"                                
+                echo “Image push complete"                                                            
             }                                                                                           
         }                                                                                               
     }                                                                                                   
