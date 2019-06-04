@@ -3,15 +3,15 @@ import java.text.SimpleDateFormat
 pipeline {
     agent any
        stages {
-        stage('init') {
-             def dockerHome = tool 'myDocker'
-             def mavenHome  = tool 'myMaven'
-             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+        stage("init") {
             steps {
               script {
+	        def dockerHome = "myDocker"
+		def mavenHome  = "myMaven"
+		env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
                 def dateFormat = new SimpleDateFormat("yy.MM.dd")
                 currentBuild.displayName = dateFormat.format(new Date()) + "-" + env.BUILD_NUMBER
-               }
+              }
               withCredentials([usernamePassword(
                 credentialsId: "dockerHubAccount",
                 usernameVariable: "USERNAME",
