@@ -1,13 +1,9 @@
-import java.text.SimpleDateFormat                                                                       
-                                                                                                        
 pipeline {                                                                                              
     agent any                                                                                           
        stages {                                                                                         
         stage("initialize") {                                                                           
             steps {                                                                                     
               script {                                                                                  
-                def dateFormat = new SimpleDateFormat("yy.MM.dd")                                       
-                currentBuild.displayName = dateFormat.format(new Date()) + "-" + env.BUILD_NUMBER       
                 def dockerHome = tool 'myDocker'                                                        
                 def mavenHome  = tool 'myMaven'                                                         
                 env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"                             
@@ -23,8 +19,8 @@ pipeline {
           }                                                                                             
         stage('jenkins') {                                                                              
             steps {                                                                                     
-                sh "cd nginx && docker image build --no-cache -t nginx ."                             
-                sh "docker image tag nginx:${currentBuild.displayName} $dockerUser/jenkins-pipeline:latest"                           
+                sh "cd nginx && docker image build --no-cache -t nginx:latest ."                             
+                sh "docker image tag nginx:latest $dockerUser/jenkins-pipeline:latest"                           
                 sh "docker image push $dockerUser/jenkins-pipeline:latest"                                
             }                                                                                           
         }                                                                                               
