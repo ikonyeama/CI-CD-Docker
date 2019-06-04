@@ -14,10 +14,10 @@ pipeline {
                }                                                                                        
               withCredentials([usernamePassword(                                                        
                 credentialsId: "dockerHubAccount",                                                      
-                usernameVariable: "USERNAME",                                                           
-                passwordVariable: "PASSWORD",                                                           
+                usernameVariable: "dockerUser",                                                           
+                passwordVariable: "dockerPassword",                                                           
               )]) {                                                                                     
-                sh "docker login -u $USERNAME -p $PASSWORD                                             
+                sh "docker login -u $dockerUser -p $dockerPassword"                                             
               }                                                                                         
             }                                                                                           
           }                                                                                             
