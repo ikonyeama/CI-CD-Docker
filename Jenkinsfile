@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat
 pipeline {
     agent any
     tools {
-	docker: 'myDocker'
+	docker 'myDocker'
+        maven 'myMaven'
     }
     stages {
 	stage('test docker installation') {
