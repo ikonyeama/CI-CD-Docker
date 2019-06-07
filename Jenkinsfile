@@ -27,8 +27,8 @@ pipeline {
 		stage('pull image and run image on container') {
             steps {
 			    sh "docker pull $dockerUser/nginx-pipeline:latest"
-                sh "docker run -d --rm -p 80:80 --name nginx-pipeline $dockerUser/nginx-pipeline:latest"
-                echo "Application started on port: 80 using http"
+                sh "docker run -d --rm -p 80:80 --name NginxMachine $dockerUser/nginx-pipeline:latest"
+                echo "NginxMachine Application started on port: 80 using http"
             }
         }
     }
