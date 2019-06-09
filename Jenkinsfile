@@ -4,18 +4,15 @@ pipeline {
         stage("initialize") {                                                                              
             steps {                                                                                        
               script {                                                                                     
-                def dockerHome = tool 'myDocker'                                                           
-                def mavenHome  = tool 'myMaven'                                                            
-                env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"                                
-               }                                                                                           
               withCredentials([usernamePassword(                                                           
                 credentialsId: "dockerHubAccount",                                                         
                 usernameVariable: "USERNAME",                                                              
                 passwordVariable: "PASSWORD",                                                              
               )]) {                                                                                        
                 sh "docker login -u $dockerUser -p $dockerPassword"                                        
-              }                                                                                            
-            }                                                                                              
+              }
+             }
+            }                                                                                            
           }                                                                                                
         stage('build image and push to dockerHub') {                                                       
             steps {                                                                                        
