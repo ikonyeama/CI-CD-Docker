@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  nginx:
+    build:
+      context: nginx/
+    privileged: true
+    user: root
+    ports:
+      - 9191:9191
+      - 70000:70000
+    container_name: nginx
+    volumes:
+      - /tmp/nginx:/var/nginx_home #Remember that, the tmp directory is designed to be wiped on system reboot.
+      - /var/run/docker.sock:/var/run/docker.sock

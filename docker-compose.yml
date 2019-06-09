@@ -1,14 +1,15 @@
 version: '3.2'
 services:
-  nginx:
+  jenkins:
     build:
-      context: nginx/
+      context: jenkins/
     privileged: true
     user: root
     ports:
-      - 9191:9191
-      - 70000:70000
-    container_name: nginx
+      - 8080:8080
+      - 50000:50000
+    container_name: jenkins
     volumes:
-      - /tmp/nginx:/var/nginx_home #Remember that, the tmp directory is designed to be wiped on system reboot.
+      - /home/ec2-user/totona/CI-CD-Docker/jenkins/downloads:/var/jenkins_home/downloads
+      - /tmp/jenkins:/var/jenkins_home #Remember that, the tmp directory is designed to be wiped on system reboot.
       - /var/run/docker.sock:/var/run/docker.sock
