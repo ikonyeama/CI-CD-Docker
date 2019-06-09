@@ -1,13 +1,10 @@
 pipeline {
     agent any
-       stages {
+    tools {
+        maven 'myMaven'
+    }
+    stages {
         stage("initialize") {
-            steps {
-              script {
-                def dockerHome = tool 'myDocker'
-                def mavenHome  = tool 'myMaven'
-                env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-               }
               withCredentials([usernamePassword(
                 credentialsId: "dockerHubAccount",
                 usernameVariable: "USERNAME",
@@ -15,8 +12,13 @@ pipeline {
               )]) {
                 sh "docker login -u $dockerUser -p $dockerPassword"
               }
-            }
           }
+        stage('test maven installation') {
+            steps {
+                sh 'mvn -version
+                sh 'which mvn'
+            }
+        }
         stage('build image and push to dockerHub') {
             steps {
                 sh "cd nginx && docker image build --no-cache -t nginx:latest ."
