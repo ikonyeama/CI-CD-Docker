@@ -15,7 +15,7 @@ pipeline {
           }
         stage('test maven installation') {
             steps {
-                sh 'mvn -version
+                sh 'mvn -version'
                 sh 'which mvn'
             }
         }
