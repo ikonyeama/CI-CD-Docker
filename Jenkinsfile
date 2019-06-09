@@ -5,14 +5,18 @@ pipeline {
     }
     stages {
         stage("initialize") {
-              withCredentials([usernamePassword(
-                credentialsId: "dockerHubAccount",
-                usernameVariable: "USERNAME",
-                passwordVariable: "PASSWORD",
-              )]) {
-                sh "docker login -u $dockerUser -p $dockerPassword"
-              }
-          }
+            steps {
+              script {
+                  withCredentials([usernamePassword(
+                    credentialsId: "dockerHubAccount",
+                    usernameVariable: "USERNAME",
+                    passwordVariable: "PASSWORD",
+                    )]) {
+                    sh "docker login -u $dockerUser -p $dockerPassword"
+                    }
+               }
+            }
+        }
         stage('test maven installation') {
             steps {
                 sh 'mvn -version'
