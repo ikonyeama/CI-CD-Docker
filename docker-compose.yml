@@ -3,8 +3,8 @@ services:
   jenkins:
     build:
       context: jenkins/
-#    environment:
-#     JENKINS_OPTS: --httpPort=-1 --httpsPort=443 --httpsKeyStore=/var/jenkins_home/jenkins_keystore.jks --httpsKeyStorePassword=pleurotus
+    environment:
+     JENKINS_OPTS: --httpPort=-1 --httpsPort=443 --httpsKeyStore=/var/jenkins_home/jenkins_keystore.jks --httpsKeyStorePassword=pleurotus
     privileged: true
     user: root
     ports:
@@ -15,4 +15,4 @@ services:
       - /home/ec2-user/totona/CI-CD-Docker/jenkins/downloads:/var/jenkins_home/downloads
       - /tmp/jenkins:/var/jenkins_home #Remember that, the tmp directory is designed to be wiped on system reboot.
       - /var/run/docker.sock:/var/run/docker.sock
-#      - /home/ec2-user/totona/CI-CD-Docker/jenkins_keystore.jks:/var/jenkins_home/jenkins_keystore.jks
+      - /home/ec2-user/totona/CI-CD-Docker/jenkins_keystore.jks:/var/jenkins_home/jenkins_keystore.jks
